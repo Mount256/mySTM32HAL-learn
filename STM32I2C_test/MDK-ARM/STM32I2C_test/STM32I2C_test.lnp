@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+"stm32i2c_test\startup_stm32f103xe.o"
+"stm32i2c_test\main.o"
+"stm32i2c_test\gpio.o"
+"stm32i2c_test\i2c.o"
+"stm32i2c_test\usart.o"
+"stm32i2c_test\stm32f1xx_it.o"
+"stm32i2c_test\stm32f1xx_hal_msp.o"
+"stm32i2c_test\stm32f1xx_hal_gpio_ex.o"
+"stm32i2c_test\stm32f1xx_hal_i2c.o"
+"stm32i2c_test\stm32f1xx_hal.o"
+"stm32i2c_test\stm32f1xx_hal_rcc.o"
+"stm32i2c_test\stm32f1xx_hal_rcc_ex.o"
+"stm32i2c_test\stm32f1xx_hal_gpio.o"
+"stm32i2c_test\stm32f1xx_hal_dma.o"
+"stm32i2c_test\stm32f1xx_hal_cortex.o"
+"stm32i2c_test\stm32f1xx_hal_pwr.o"
+"stm32i2c_test\stm32f1xx_hal_flash.o"
+"stm32i2c_test\stm32f1xx_hal_flash_ex.o"
+"stm32i2c_test\stm32f1xx_hal_exti.o"
+"stm32i2c_test\stm32f1xx_hal_uart.o"
+"stm32i2c_test\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "STM32I2C_test\STM32I2C_test.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "STM32I2C_test.map" -o STM32I2C_test\STM32I2C_test.axf

@@ -1,0 +1,21 @@
+--cpu Cortex-M3
+"stm32led_test\startup_stm32f103xe.o"
+"stm32led_test\main.o"
+"stm32led_test\stm32f1xx_it.o"
+"stm32led_test\stm32f1xx_hal_msp.o"
+"stm32led_test\stm32f1xx_hal_gpio_ex.o"
+"stm32led_test\stm32f1xx_hal.o"
+"stm32led_test\stm32f1xx_hal_rcc.o"
+"stm32led_test\stm32f1xx_hal_rcc_ex.o"
+"stm32led_test\stm32f1xx_hal_gpio.o"
+"stm32led_test\stm32f1xx_hal_dma.o"
+"stm32led_test\stm32f1xx_hal_cortex.o"
+"stm32led_test\stm32f1xx_hal_pwr.o"
+"stm32led_test\stm32f1xx_hal_flash.o"
+"stm32led_test\stm32f1xx_hal_flash_ex.o"
+"stm32led_test\stm32f1xx_hal_exti.o"
+"stm32led_test\system_stm32f1xx.o"
+--strict --scatter "STM32LED_test\STM32LED_test.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "STM32LED_test.map" -o STM32LED_test\STM32LED_test.axf

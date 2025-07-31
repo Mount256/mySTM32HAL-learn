@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"stm32tim_test\startup_stm32f103xe.o"
+"stm32tim_test\main.o"
+"stm32tim_test\stm32f1xx_it.o"
+"stm32tim_test\stm32f1xx_hal_msp.o"
+"stm32tim_test\stm32f1xx_hal_gpio_ex.o"
+"stm32tim_test\stm32f1xx_hal_tim.o"
+"stm32tim_test\stm32f1xx_hal_tim_ex.o"
+"stm32tim_test\stm32f1xx_hal.o"
+"stm32tim_test\stm32f1xx_hal_rcc.o"
+"stm32tim_test\stm32f1xx_hal_rcc_ex.o"
+"stm32tim_test\stm32f1xx_hal_gpio.o"
+"stm32tim_test\stm32f1xx_hal_dma.o"
+"stm32tim_test\stm32f1xx_hal_cortex.o"
+"stm32tim_test\stm32f1xx_hal_pwr.o"
+"stm32tim_test\stm32f1xx_hal_flash.o"
+"stm32tim_test\stm32f1xx_hal_flash_ex.o"
+"stm32tim_test\stm32f1xx_hal_exti.o"
+"stm32tim_test\system_stm32f1xx.o"
+--strict --scatter "STM32TIM_test\STM32TIM_test.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "STM32TIM_test.map" -o STM32TIM_test\STM32TIM_test.axf
