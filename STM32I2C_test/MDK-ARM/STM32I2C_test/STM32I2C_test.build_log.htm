@@ -28,14 +28,18 @@ Project File Date:  07/29/2025
 Build target 'STM32I2C_test'
 compiling main.c...
 ../Core/Src/main.c(101): warning:  #870-D: invalid multibyte character sequence
-    printf("USART1已准备就�?..\n\n");
-../Core/Src/main.c(120): warning:  #181-D: argument is incompatible with corresponding format string conversion
+    printf("USART1已准备就�?..\r\n");
+../Core/Src/main.c(105): warning:  #870-D: invalid multibyte character sequence
+    printf("本次为STM32采用I2C与存储器24C02通讯的实�?..\r\n");
+../Core/Src/main.c(108): warning:  #181-D: argument is incompatible with corresponding format string conversion
+    scanf("%d", &addr);
+../Core/Src/main.c(132): warning:  #181-D: argument is incompatible with corresponding format string conversion
           scanf("%d", &data);
-../Core/Src/main.c: 2 warnings, 0 errors
+../Core/Src/main.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=13576 RO-data=444 RW-data=56 ZI-data=1184  
+Program Size: Code=13888 RO-data=444 RW-data=56 ZI-data=1184  
 FromELF: creating hex file...
-"STM32I2C_test\STM32I2C_test.axf" - 0 Error(s), 2 Warning(s).
+"STM32I2C_test\STM32I2C_test.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 

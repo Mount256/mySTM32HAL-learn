@@ -98,17 +98,29 @@ int main(void)
   MX_USART1_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  printf("USART1已准备就绪...\n\n");
+  printf("USART1已准备就绪...\r\n");
   LED0_OFF;
   LED1_OFF;
   BEEP_OFF;
-  printf("本次为STM32采用I2C与存储器24C02通讯的实验\n\n");
+  printf("本次为STM32采用I2C与存储器24C02通讯的实验...\r\n");
   
-  EEPROM_PageWrite(addr, data_a, 4);
-  EEPROM_SeqRead(addr, data_rec_a, 4);
-  for(i = 0; i < 8; i++)
+  printf("连续读写测试...输入首地址：\r\n");
+  scanf("%d", &addr);
+  if (EEPROM_PageWrite(addr, data_a, 4) == HAL_OK)
+		printf("已发送成功！\r\n");
+  else
+		printf("发送失败！\r\n");
+	  
+  if (EEPROM_SeqRead(addr, data_rec_a, 4) == HAL_OK)
+  {
+	  printf("已接收成功！数据为：\r\n");
+	  for(i = 0; i < 8; i++)
 		printf("%d  \n", data_rec_a[i]);
-
+  }
+        
+  else
+		printf("接收失败！\r\n");
+	  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,19 +128,19 @@ int main(void)
   
   while (1)
   {
-	  printf("请输入数据data：\n\n");
+	  printf("请输入数据data：\r\n");
 	  scanf("%d", &data);
 	  if (EEPROM_ByteWrite(addr, &data) == HAL_OK)
-		printf("已发送成功！\n\n");
+		printf("已发送成功！\r\n");
 	  else
-		printf("发送失败！\n\n");
+		printf("发送失败！\r\n");
 	  
 	  //HAL_Delay(50);		//写一次和读一次之间需要短暂的延时
 	  
       if (EEPROM_RandomRead(addr, &data_rec) == HAL_OK)
-        printf("已接收成功！数据为：%d\n\n", data_rec);
+        printf("已接收成功！数据为：%d\r\n", data_rec);
 	  else
-		printf("接收失败！\n\n");
+		printf("接收失败！\r\n");
 	  
     /* USER CODE END WHILE */
 

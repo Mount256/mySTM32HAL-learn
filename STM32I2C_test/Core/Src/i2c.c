@@ -150,7 +150,61 @@ uint8_t EEPROM_RandomRead(uint8_t addr, uint8_t* data)
   */
 uint8_t EEPROM_PageWrite(uint8_t addr, uint8_t *data, uint8_t num)
 {
-	return HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, data, num, 0xFFFF);
+	uint8_t i = 0;
+    uint16_t cnt = 0;		//写入字节计数
+    
+    /* 对于起始地址，有两种情况，分别判断 */
+    if(0 == addr % 8 )
+    {
+        /* 1. 起始地址刚好是页开始地址 */
+        /* 对于写入的字节数，有两种情况，分别判断 */
+        if(num <= 8)
+        {
+            // 1.1 写入的字节数不大于一页，直接写入
+            return HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, data, num, 0xFFFF);
+        }
+        else
+        {
+            // 1.2 写入的字节数大于一页，先将整页循环写入
+            for(i = 0;i < num/8; i++)
+            {
+                HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, &data[cnt], 8, 0xFFFF);
+                addr += 8;
+                cnt += 8;
+            }
+            // 1.2 将剩余的字节写入
+            return HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, &data[cnt], num - cnt, 0xFFFF);
+        }
+    }
+    else
+    {
+        /* 2. 起始地址偏离页开始地址 */
+        /* 对于写入的字节数，有两种情况，分别判断 */
+        if(num <= (8 - addr%8))
+        {
+            /* 2.1 在该页可以写完 */
+            return HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, data, num, 0xFFFF);
+        }
+        else
+        {
+            /* 2.2 该页写不完 */
+            // 先将该页写完
+            cnt += 8 - addr%8;
+            HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, data, cnt, 0xFFFF);
+            addr += cnt;
+            
+            // 循环写整页数据
+            for(i = 0;i < (num - cnt)/8; i++)
+            {
+                HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, &data[cnt], 8, 0xFFFF);
+                addr += 8;
+                cnt += 8;
+            }
+            
+            // 将剩下的字节写入
+            return HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, addr, I2C_MEMADD_SIZE_8BIT, &data[cnt], num - cnt, 0xFFFF);
+        }			
+    }
 }
 
 /**
